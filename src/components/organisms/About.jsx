@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
+import { motion } from "framer-motion";
+import React from "react";
+import ApperIcon from "@/components/ApperIcon";
 
 const About = () => {
   return (
@@ -17,19 +18,31 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
+<motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
+            <div className="relative">
+            {/* Artist Portrait */}
             <div className="aspect-square overflow-hidden rounded-2xl shadow-lifted">
               <img
-                src="/api/placeholder/500/500"
+                src="https://via.placeholder.com/500x500/d4a574/ffffff?text=Alexandra+Chen"
                 alt="Alexandra Chen - Artist"
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
               />
+              <div 
+                className="w-full h-full bg-accent/10 flex items-center justify-center text-accent font-medium"
+                style={{ display: 'none' }}
+              >
+                Artist Portrait
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, x: 50 }}
