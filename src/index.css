@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom styles for paper texture effect */
+body {
+  background: linear-gradient(135deg, #fafaf8 0%, #f5f5f0 100%);
+  min-height: 100vh;
+}
+
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(212, 165, 116, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(26, 26, 26, 0.01) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Sketch frame effect */
+.sketch-frame {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(45deg, #1a1a1a 0%, #d4a574 50%, #1a1a1a 100%) border-box;
+  border-radius: 4px;
+}
+
+.sketch-frame::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #1a1a1a, #d4a574, #1a1a1a);
+  border-radius: 6px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sketch-frame:hover::before {
+  opacity: 0.1;
+}
+
+/* Lightbox custom styles */
+.lightbox-overlay {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* Toast customization */
+.Toastify__toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  min-height: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.Toastify__toast--success {
+  background: #4a7c59;
+}
+
+.Toastify__toast--error {
+  background: #c1666b;
+}
+
+.Toastify__toast--warning {
+  background: #e9c46a;
+  color: #1a1a1a;
+}
+
+.Toastify__toast--info {
+  background: #4a5568;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading skeleton animation */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    #f5f5f0 25%,
+    #e8e8e8 50%,
+    #f5f5f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4a574;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c19660;
+}
