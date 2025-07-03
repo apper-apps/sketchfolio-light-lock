@@ -40,12 +40,13 @@ const About = () => {
                 style={{ display: 'none' }}
               >
                 Artist Portrait
+Artist Portrait
               </div>
             </div>
           </div>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="space-y-6"
