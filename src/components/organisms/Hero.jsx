@@ -164,7 +164,7 @@ const Hero = ({ featuredArtwork, onScrollToGallery }) => {
                 rotateY: 5
               }}
               whileTap={{ scale: 0.95 }}
-              onTap={() => {
+onTap={(event) => {
                 // Add ripple effect
                 const ripple = document.createElement('div');
                 ripple.className = 'absolute inset-0 bg-surface/30 rounded-lg animate-ripple pointer-events-none';
@@ -198,7 +198,7 @@ const Hero = ({ featuredArtwork, onScrollToGallery }) => {
                 rotateY: -5
               }}
               whileTap={{ scale: 0.95 }}
-              onTap={() => {
+onTap={(event) => {
                 // Add ripple effect
                 const ripple = document.createElement('div');
                 ripple.className = 'absolute inset-0 bg-accent/30 rounded-lg animate-ripple pointer-events-none';
