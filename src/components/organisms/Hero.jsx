@@ -11,8 +11,8 @@ const Hero = ({ featuredArtwork, onScrollToGallery }) => {
         animate={{ scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
       >
-        <motion.img
-          src={featuredArtwork?.imageUrl || '/api/placeholder/1920/1080'}
+<motion.img
+          src={featuredArtwork?.imageUrl || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=faces'}
           alt={featuredArtwork?.title || 'Featured artwork'}
           className="w-full h-full object-cover"
           animate={{ 

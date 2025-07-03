@@ -71,8 +71,8 @@ const About = () => {
               whileHover={{ scale: 1.02, rotateY: 5, rotateX: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <motion.img
-                src="https://via.placeholder.com/500x500/d4a574/ffffff?text=Alexandra+Chen"
+<motion.img
+                src="https://images.unsplash.com/photo-1494790108755-2616c79e8dad?w=500&h=500&fit=crop&crop=face"
                 alt="Alexandra Chen - Artist"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 onError={e => {
