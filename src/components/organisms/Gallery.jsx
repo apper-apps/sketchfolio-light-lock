@@ -63,28 +63,85 @@ const Gallery = () => {
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadArtworks} />;
 
-  return (
-    <section id="gallery" className="py-20 bg-background paper-texture">
-      <div className="container mx-auto px-4">
+return (
+    <section id="gallery" className="relative py-20 bg-background paper-texture overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-32 h-32 border border-accent/10 rounded-lg"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              transform: `rotate(${Math.random() * 45}deg)`
+            }}
+            animate={{
+              rotate: [0, 360],
+              scale: [1, 1.1, 1],
+              opacity: [0.1, 0.3, 0.1]
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 5
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
-            Portfolio
-          </h2>
-          <p className="text-lg text-primary/70 max-w-2xl mx-auto">
+          <motion.h2 
+            className="font-display text-4xl md:text-5xl font-bold text-primary mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.span
+              animate={{ 
+                textShadow: [
+                  "0 0 0px rgba(212, 165, 116, 0)",
+                  "0 0 20px rgba(212, 165, 116, 0.5)",
+                  "0 0 0px rgba(212, 165, 116, 0)"
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Portfolio
+            </motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-primary/70 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Explore my collection of sketches, each piece capturing the essence of its subject through careful observation and skilled technique.
-          </p>
+          </motion.p>
         </motion.div>
 
-        <FilterBar
-          filters={filters}
-          activeFilter={activeFilter}
-          onFilterChange={handleFilterChange}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <FilterBar
+            filters={filters}
+            activeFilter={activeFilter}
+            onFilterChange={handleFilterChange}
+          />
+        </motion.div>
 
         {filteredArtworks.length === 0 ? (
           <Empty
@@ -97,14 +154,62 @@ const Gallery = () => {
           <motion.div
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.05,
+                  delayChildren: 0.1
+                }
+              }
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <AnimatePresence>
-              {filteredArtworks.map((artwork) => (
-                <ArtworkCard
+            <AnimatePresence mode="popLayout">
+              {filteredArtworks.map((artwork, index) => (
+                <motion.div
                   key={artwork.Id}
-                  artwork={artwork}
-                  onClick={handleArtworkClick}
-                />
+                  layout
+                  variants={{
+                    hidden: { 
+                      opacity: 0, 
+                      y: 50,
+                      scale: 0.8,
+                      rotateY: -10
+                    },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      scale: 1,
+                      rotateY: 0,
+                      transition: {
+                        type: "spring",
+                        damping: 25,
+                        stiffness: 200
+                      }
+                    }
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    y: -50,
+                    transition: { duration: 0.2 }
+                  }}
+                  whileHover={{ 
+                    y: -10,
+                    rotateY: 5,
+                    rotateX: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <ArtworkCard
+                    artwork={artwork}
+                    onClick={handleArtworkClick}
+                  />
+                </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
